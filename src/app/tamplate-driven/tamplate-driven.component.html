@@ -1,0 +1,74 @@
+<form #tamplateForm="ngForm" (ngSubmit)="onSubmit(tamplateForm)">
+     <div class="form-group">
+        <label for="first">First Name</label>
+        <input type="text" id="first" name="first" class="form-control" required ngModel #first="ngModel"
+        [(ngModel)]="person.first">
+    </div>
+    <div class="alert" [hidden]="first.valid || first.pristine">
+        please enter your First Name
+    </div>
+ 
+    <div class="form-group">
+        <label for="last">Last Name</label>
+        <input type="text" id="last" name="last" class="form-control" required ngModel #last="ngModel"
+        [(ngModel)]="person.last">    
+    </div>
+    <div class="alert" [hidden]="last.valid || last.pristine">
+        please enter your Last Name
+    </div>
+     <div class="form-group">
+        <label for="mail">Work Email</label>
+        <input type="email" id="mail" name="mail" class="form-control" required ngModel #mail="ngModel"
+        [(ngModel)]="person.mail">
+    </div> 
+            <div class="alert" [hidden]="mail.valid || mail.pristine">
+            please enter your mail
+        </div>     
+    <div class="form-group">
+        <label for="company">Company Website</label>
+        <input type="text" id="company" name="company" class="form-control" required ngModel #company="ngModel"
+        [(ngModel)]="person.company">
+    </div> 
+    <div class="alert" [hidden]="company.valid || company.pristine">
+        please enter your company Website
+    </div>
+    <div class="form-group">
+        <label for="country">Country</label>
+            <select name="country" class="form-control" id="country"
+            [(ngModel)]="person.country"
+            ngModel #country = 'ngModel'>
+              <!-- <option value="" disabled>Select country</option> -->
+              <option *ngFor="let country of countries; let i=index" [value]="person.country" [id]='person.country'
+              [selected]="person.country===country"  
+              >{{countries[i]}}</option>
+            </select>
+    </div> 
+    <div class="alert alert-danger" [hidden]='country.valid || country.pristine'>
+        Please Select country
+    </div>
+    <div class="alert" [hidden]="country.valid || country.pristine">
+        please enter your country
+    </div> 
+    <div class="form-group">
+        <label for="payments">Payments Volume</label>
+        <select name="payments" class="form-control form-control--money" id="payments" 
+            [(ngModel)]="person.payments"
+            ngModel #payments = 'ngModel'
+            placeholder="select monthly amount">
+              <!-- <option value="" disabled>Select country</option> -->
+              <option *ngFor="let payments of paymentys; let i=index" [value]="person.payments" [id]='person.payments'
+              [selected]="person.payments===payments"  
+              >{{paymentys[i]}}</option>
+            </select>    
+    </div>  
+    <div class="alert" [hidden]="payments.valid || payments.pristine">
+        please enter your payments Volume
+    </div>
+
+    <div class="form-group">
+        <label for="else">Anything else ?</label>
+        <textarea name="else" id="else" cols="30" rows="10" class="form-control form-control--aditional-heights"  ngModel #else="ngModel"
+        [(ngModel)]="person.else"></textarea>  
+    </div>  
+    <button type="submit" [disabled]="tamplateForm.invalid"> Enter </button>
+</form>
